@@ -1,93 +1,51 @@
-## Amazon E-Commerce Data Model
+# Amazon E-Commerce Data Analysis
 
-```mermaid
-erDiagram
-    %% Product Catalog
-    Products {
-        string SKU PK "Stock Keeping Unit"
-        string ASIN "Amazon Product ID"
-        string FNSKU "Fulfillment Network SKU"
-        string ProductName
-        string Brand
-        string BrandType
-        decimal UnitCost "Cost of Goods"
-        decimal ReferralFee "Amazon Commission"
-        decimal FBAFee "Fulfillment Fee"
-        decimal StorageFee
-        string Status "Current/Discontinued"
-    }
+Analysis of BlissBaby product performance on Amazon (October-November 2025).
 
-    Calendar {
-        date Date PK
-        int Year
-        string Month
-        int WeekNumber
-        string Quarter
-    }
+## Analysis Workflow
 
-    Campaigns {
-        string CampaignID PK
-        string CampaignName
-        string AdType "Sponsored Product/Brand"
-        string TargetingType "Auto/Manual"
-        decimal Budget
-    }
+**Data Pipeline:**
+1. Raw data sampled and imported to Power BI for initial exploration
+2. Database cleaned using SQL views and queries
+3. Detailed metrics calculated and analyzed
+4. Key insights identified through exploratory analysis
 
-    %% Transaction Tables
-    Orders {
-        string OrderID PK
-        date OrderDate FK
-        string SKU FK
-        int Quantity
-        decimal GrossSales
-        decimal NetRevenue
-        string City
-        string State
-        string FulfillmentChannel
-    }
+**Deliverables:**
+- `detailed_analysis.py` - SQL-cleaned data with detailed calculations
+- `KeyInsights.ipynb` - Business question analysis with visualizations
 
-    Returns {
-        string ReturnID PK
-        date ReturnDate FK
-        string SKU FK
-        int ReturnQuantity
-        string ReturnReason
-        string Disposition "Sellable/Damaged/Destroyed"
-        decimal RefundAmount
-    }
+## Business Questions & Findings
 
-    AdPerformance {
-        string AdID PK
-        date Date FK
-        string SKU FK
-        string CampaignID FK
-        decimal AdSpend
-        decimal AdSales
-        int Clicks
-        int Impressions
-        decimal ACOS "Ad Cost of Sale"
-        decimal ROAS "Return on Ad Spend"
-    }
+### 1. When are products most returned?
+November shows 82% of returns (28 of 34 total). Fridays peak with 7 returns.
 
-    Inventory {
-        date Date FK
-        string SKU FK
-        int AvailableUnits
-        int ReservedUnits
-        int InboundShipment
-        string WarehouseLocation
-    }
+### 2. Product with most ads and clicks?
+UB0101 leads with 2,328 clicks and $645 ad spend. Highest impressions at 532,365.
 
-    %% Relationships
-    Products ||--o{ Orders : "sold in"
-    Products ||--o{ Returns : "returned from"
-    Products ||--o{ AdPerformance : "advertised in"
-    Products ||--o{ Inventory : "tracked in"
+### 3. Is the most advertised product also the best seller?
+Yes. UB0101 has both highest ad volume and 524 units sold. The 49% organic sales component indicates strong brand recognition beyond paid channels.
 
-    Calendar ||--o{ Orders : "placed on"
-    Calendar ||--o{ Returns : "processed on"
-    Calendar ||--o{ AdPerformance : "ran on"
-    Calendar ||--o{ Inventory : "snapshot on"
+### 4. Least performing products?
+UBW101 ($1.72 ROAS), UBL101 (172 clicks), USP101 (6.52% return rate) need optimization.
 
-    Campaigns ||--o{ AdPerformance : "contains"
+## Running the Analysis
+
+### Detailed Metrics (Python)
+```bash
+python detailed_analysis.py
 ```
+Outputs:
+- Aggregate KPIs (Total Sales, Ad Spend, ACoS, TACoS, Net Margin)
+- SKU-level performance breakdown
+- Monthly trends
+- Visualization dashboard (PNG export)
+
+### Key Insights (Jupyter)
+```bash
+jupyter notebook KeyInsights.ipynb
+```
+Covers:
+- Return timing and patterns
+- Advertising performance comparison
+- Sales vs ad correlation
+- Weak performer analysis with visualizations
