@@ -59,7 +59,7 @@ Analysis of BlissBaby product performance on Amazon (October-November 2025).
 ## Visualizations
 
 ### Interactive Dashboard Analysis
-![Amazon Baby Bliss Dashboard](https://github.com/user-attachments/assets/dashboard-image.png)
+![Amazon Baby Bliss Dashboard](powerbi.png)
 
 **Dashboard Highlights:**
 - **Total Sales:** $27.30K with -3.23% net margin
