@@ -99,6 +99,66 @@ Covers:
 - Sales vs ad correlation
 - Weak performer analysis with visualizations
 
+## Power BI Dashboard Measures
+
+### Revenue Metrics
+**Total Sales**
+```dax
+Total Sales = SUM('Product_Sales'[item-price])
+```
+
+**Total Ad Sales**
+```dax
+Total Ad Sales = SUM('Fact_Ads'[Sales])
+```
+
+### Cost Metrics
+**Total COGS**
+```dax
+Total COGS = 
+SUMX(
+    'Product_Sales', 
+    'Product_Sales'[quantity] * RELATED('Dim_Products'[COST])
+)
+```
+
+**Total Fees**
+```dax
+Total Fees = 
+SUMX(
+    'Product_Sales', 
+    ('Product_Sales'[item-price] * 0.15) + 
+    ('Product_Sales'[quantity] * RELATED('Dim_Products'[FBA COST]))
+)
+```
+
+**Total Ad Spend**
+```dax
+Total Ad Spend = SUM('Fact_Ads'[Spend])
+```
+
+### Profitability Metrics
+**Net Profit**
+```dax
+Net Profit = [Total Sales] - [Total COGS] - [Total Fees] - [Total Ad Spend]
+```
+
+**Net Margin %**
+```dax
+Net Margin % = DIVIDE([Net Profit], [Total Sales], 0)
+```
+
+### Advertising Performance Metrics
+**ACOS (Advertising Cost of Sale)**
+```dax
+ACOS = DIVIDE([Total Ad Spend], [Total Ad Sales], 0)
+```
+
+**TACOS (Total Advertising Cost of Sale)**
+```dax
+TACOS = DIVIDE([Total Ad Spend], [Total Sales], 0)
+```
+
 ## Technical Stack
 - **Data Processing:** Python, SQL
 - **Visualization:** Power BI, Matplotlib, Seaborn
