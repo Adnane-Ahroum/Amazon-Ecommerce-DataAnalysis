@@ -1,6 +1,6 @@
-# Amazon E-Commerce Data Analysis
+# Amazon BlissBaby E-Commerce Data Analysis
 
-Analysis of BlissBaby product performance on Amazon (October-November 2025).
+Duration: 12 Months (January-December 2025).
 
 ## Analysis Workflow
 
@@ -50,11 +50,7 @@ Analysis of BlissBaby product performance on Amazon (October-November 2025).
                     └─────────────────┘
 ```
 
-**Key Benefits:**
-- Centralized fact table for all sales metrics
-- Simplified queries for business intelligence
-- Optimized for aggregations and time-series analysis
-- Scalable dimension tables for future expansion
+ 
 
 ## Visualizations
 
@@ -91,7 +87,7 @@ Outputs:
 - Aggregate KPIs (Total Sales, Ad Spend, ACoS, TACoS, Net Margin)
 - SKU-level performance breakdown
 - Monthly trends
-- Visualization dashboard (PNG export)
+- Visualizations & Plots
 
 ### Key Insights (Jupyter)
 ```bash
