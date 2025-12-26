@@ -14,6 +14,59 @@ Analysis of BlissBaby product performance on Amazon (October-November 2025).
 - `detailed_analysis.py` - SQL-cleaned data with detailed calculations
 - `KeyInsights.ipynb` - Business question analysis with visualizations
 
+## Data Model Architecture
+
+### Star Schema Design
+
+```
+                    ┌─────────────────┐
+                    │   Dim_Product   │
+                    ├─────────────────┤
+                    │ ProductID (PK)  │
+                    │ SKU             │
+                    │ ProductName     │
+                    │ Category        │
+                    │ Price           │
+                    └────────┬────────┘
+                             │
+                             │
+        ┌────────────────────┼────────────────────┐
+        │                    │                    │
+┌───────┴────────┐  ┌────────┴────────┐  ┌───────┴────────┐
+│   Dim_Date     │  │   Fact_Sales    │  │ Dim_Customer   │
+├────────────────┤  ├─────────────────┤  ├────────────────┤
+│ DateID (PK)    │──│ SaleID (PK)     │──│ CustomerID(PK) │
+│ Date           │  │ DateID (FK)     │  │ CustomerName   │
+│ Day            │  │ ProductID (FK)  │  │ Location       │
+│ Month          │  │ CustomerID (FK) │  │ JoinDate       │
+│ Year           │  │ Quantity        │  └────────────────┘
+│ Quarter        │  │ TotalSales      │
+│ DayOfWeek      │  │ AdSpend         │
+└────────────────┘  │ AdClicks        │
+                    │ Returns         │
+                    │ NetProfit       │
+                    │ ACOS            │
+                    │ TACOS           │
+                    └─────────────────┘
+```
+
+**Key Benefits:**
+- Centralized fact table for all sales metrics
+- Simplified queries for business intelligence
+- Optimized for aggregations and time-series analysis
+- Scalable dimension tables for future expansion
+
+## Visualizations
+
+### Interactive Dashboard Analysis
+![Amazon Baby Bliss Dashboard](https://github.com/user-attachments/assets/dashboard-image.png)
+
+**Dashboard Highlights:**
+- **Total Sales:** $27.30K with -3.23% net margin
+- **Advertising Efficiency:** 68.67% ACoS, 34.29% TACoS
+- **Peak Performance:** October-November period shows significant TACOS spike
+- **Top SKU:** UB0101 dominates ad spend with $3.8K investment
+
 ## Business Questions & Findings
 
 ### 1. When are products most returned?
@@ -49,3 +102,8 @@ Covers:
 - Advertising performance comparison
 - Sales vs ad correlation
 - Weak performer analysis with visualizations
+
+## Technical Stack
+- **Data Processing:** Python, SQL
+- **Visualization:** Power BI, Matplotlib, Seaborn
+- **Analysis:** Pandas, NumPy, Jupyter Notebook
