@@ -63,43 +63,7 @@ Duration: 12 Months (January-December 2025).
 - **Peak Performance:** October-November period shows significant TACOS spike
 - **Top SKU:** UB0101 dominates ad spend with $3.8K investment
 
-## Business Questions & Findings
-
-### 1. When are products most returned?
-November shows 82% of returns (28 of 34 total). Fridays peak with 7 returns.
-
-### 2. Product with most ads and clicks?
-UB0101 leads with 2,328 clicks and $645 ad spend. Highest impressions at 532,365.
-
-### 3. Is the most advertised product also the best seller?
-Yes. UB0101 has both highest ad volume and 524 units sold. The 49% organic sales component indicates strong brand recognition beyond paid channels.
-
-### 4. Least performing products?
-UBW101 ($1.72 ROAS), UBL101 (172 clicks), USP101 (6.52% return rate) need optimization.
-
-## Running the Analysis
-
-### Detailed Metrics (Python)
-```bash
-python detailed_analysis.py
-```
-Outputs:
-- Aggregate KPIs (Total Sales, Ad Spend, ACoS, TACoS, Net Margin)
-- SKU-level performance breakdown
-- Monthly trends
-- Visualizations & Plots
-
-### Key Insights (Jupyter)
-```bash
-jupyter notebook KeyInsights.ipynb
-```
-Covers:
-- Return timing and patterns
-- Advertising performance comparison
-- Sales vs ad correlation
-- Weak performer analysis with visualizations
-
-## Power BI Dashboard Measures
+## Power BI DAX Measures
 
 ### Revenue Metrics
 **Total Sales**
@@ -158,6 +122,43 @@ ACOS = DIVIDE([Total Ad Spend], [Total Ad Sales], 0)
 ```dax
 TACOS = DIVIDE([Total Ad Spend], [Total Sales], 0)
 ```
+
+## Business Questions & Findings
+
+### 1. When are products most returned?
+November shows 82% of returns (28 of 34 total). Fridays peak with 7 returns.
+
+### 2. Product with most ads and clicks?
+UB0101 leads with 2,328 clicks and $645 ad spend. Highest impressions at 532,365.
+
+### 3. Is the most advertised product also the best seller?
+Yes. UB0101 has both highest ad volume and 524 units sold. The 49% organic sales component indicates strong brand recognition beyond paid channels.
+
+### 4. Least performing products?
+UBW101 ($1.72 ROAS), UBL101 (172 clicks), USP101 (6.52% return rate) need optimization.
+
+## Running the Analysis
+
+### Detailed Metrics (Python)
+```bash
+python detailed_analysis.py
+```
+Outputs:
+- Aggregate KPIs (Total Sales, Ad Spend, ACoS, TACoS, Net Margin)
+- SKU-level performance breakdown
+- Monthly trends
+- Visualizations & Plots
+
+### Key Insights (Jupyter)
+```bash
+jupyter notebook KeyInsights.ipynb
+```
+Covers:
+- Return timing and patterns
+- Advertising performance comparison
+- Sales vs ad correlation
+- Weak performer analysis with visualizations
+
 
 ## Technical Stack
 - **Data Processing:** Python, SQL
